@@ -33,6 +33,7 @@ class Indexer:
                 'min_age',
                 'searchable(previous_players)',
                 'numplays',
+                'location',
             ],
             'customRanking': ['asc(name)'],
             'highlightPreTag': '<strong class="highlight">',
@@ -170,6 +171,9 @@ class Indexer:
             if i != 0 and i % 25 == 0:
                 print(f"Indexed {i} of {len(games)} games...")
 
+            game["location"] = game.get("location", "unknown")  # Standardwert, falls keine Location vorhanden
+
+          
             if game["image"]:
                 image_data = self.fetch_image(game["image"])
                 if image_data:

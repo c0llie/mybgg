@@ -251,6 +251,7 @@ function get_widgets(SETTINGS) {
           game.description = game.description.trim();
           game.has_expansions = (game.expansions.length > 0);
           game.has_more_expansions = (game.has_more_expansions);
+          game.location = game.location(", ");
 
           if (game.has_more_expansions) {
             game_prefix = game.name.indexOf(":")? game.name.substring(0, game.name.indexOf(":")) : game.name;

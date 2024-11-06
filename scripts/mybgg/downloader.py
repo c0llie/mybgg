@@ -1,6 +1,7 @@
 from mybgg.bgg_client import BGGClient
 from mybgg.bgg_client import CacheBackendSqlite
 from mybgg.models import BoardGame
+import csv
 
 
 class Downloader():
@@ -17,8 +18,21 @@ class Downloader():
             self.client = BGGClient(
                 debug=debug,
             )
+            
+    def load_game_locations_from_csv(self, file_path):
+        game_locations = {}
+        with open(file_path, mode='r', encoding='utf-8-sig') as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=',')
+            for row in reader:     
+                print(row)
+                game_id = int(row['id'])  # Stelle sicher, dass der Wert die gleiche ID wie in der API 
+                location = row['comment']
+                game_locations[game_id] = location
+        return game_locations
+    
+    
 
-    def collection(self, user_name, extra_params):
+    def collection(self, user_name, extra_params, game_locations):
         collection_data = []
         plays_data = []
 
@@ -68,8 +82,10 @@ class Downloader():
                 expansions=[
                     BoardGame(expansion_data)
                     for expansion_data in game_id_to_expansion[game_data["id"]]
-                ]
+                ],
+               location=game_locations.get(game_data["id"])  # Standortdaten hinzufügen
             )
+            
             for game_data in games_data
         ]
         return games

@@ -4,15 +4,20 @@
         "title": ""
     },
     "boardgamegeek": {
-        "user_name": "YOUR_BGG_USERNAME",
+        "user_name": "BingoClub",
         "extra_params": {
             "own": 1
         }
     },
     "algolia": {
-        "app_id": "YOUR_APP_ID",
-        "api_key_search_only": "YOUR_PUBLIC_API_KEY",
+        "app_id": "YW6832WP47",
+        "api_key_search_only": "2ee45e749a46c1c50f6f49031bd7d437",
         "index_name": "YOUR_INDEX_NAME",
         "hits_per_page": 24
+    },
+    
+    "location_csv": {
+        "file_path": "/collection.csv"
+        
     }
 }

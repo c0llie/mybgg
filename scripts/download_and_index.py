@@ -7,18 +7,28 @@ from setup_logging import setup_logging
 def main(args):
     SETTINGS = json.load(open("config.json", "rb"))
 
+  
+
     downloader = Downloader(
         project_name=SETTINGS["project"]["name"],
         cache_bgg=args.cache_bgg,
         debug=args.debug,
     )
+    
+    csv_file_path="/Users/nilsheyberg/mybgg/collection.csv"
+    game_locations = downloader.load_game_locations_from_csv(csv_file_path)
+    
     collection = downloader.collection(
         user_name=SETTINGS["boardgamegeek"]["user_name"],
         extra_params=SETTINGS["boardgamegeek"]["extra_params"],
+        game_locations=game_locations
     )
+    
+    
+    num_locations = len(game_locations)
     num_games = len(collection)
     num_expansions = sum([len(game.expansions) for game in collection])
-    print(f"Imported {num_games} games and {num_expansions} expansions from boardgamegeek.")
+    print(f"Imported {num_games} games and {num_expansions} expansions from boardgamegeek. Also {num_locations} locations were imported.")
 
     if not len(collection):
         assert False, "No games imported, is the boardgamegeek part of config.json correctly set?"
