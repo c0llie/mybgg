@@ -92,19 +92,19 @@ function on_render() {
 
 function get_widgets(SETTINGS) {
   const WEIGHT_LABELS = [
-    "Light",
-    "Light Medium",
-    "Medium",
-    "Medium Heavy",
-    "Heavy"
+    "Leicht",
+    "Leicht-Mittel",
+    "Mittel",
+    "Mittel-Schwer",
+    "Schwer"
   ];
   const PLAYING_TIME_ORDER = [
-    '< 30min',
-    '30min - 1h',
-    '1-2h',
-    '2-3h',
-    '3-4h',
-    '> 4h'
+    '< 30 Min.',
+    '30 Min. - 1 Std.',
+    '1-2 Std.',
+    '2-3 Std.',
+    '3-4 Std.',
+    '> 4 Std.'
   ];
 
   function panel(header) {
@@ -120,24 +120,24 @@ function get_widgets(SETTINGS) {
   return {
     "search": instantsearch.widgets.searchBox({
       container: '#search-box',
-      placeholder: 'Search for games'
+      placeholder: 'Spiele suchen'
     }),
     "sort": instantsearch.widgets.sortBy({
       container: '#sort-by',
       items: [
         {label: 'Name', value: SETTINGS.algolia.index_name},
-        {label: 'BGG Rank', value: SETTINGS.algolia.index_name + '_rank_ascending'},
-        {label: 'Number of ratings', value: SETTINGS.algolia.index_name + '_numrated_descending'},
-        {label: 'Number of owners', value: SETTINGS.algolia.index_name + '_numowned_descending'}
+        {label: 'BGG Rang', value: SETTINGS.algolia.index_name + '_rank_ascending'},
+        {label: 'Anzahl Bewertungen', value: SETTINGS.algolia.index_name + '_numrated_descending'},
+        {label: 'Anzahl Besitzer', value: SETTINGS.algolia.index_name + '_numowned_descending'}
       ]
     }),
     "clear": instantsearch.widgets.clearRefinements({
       container: '#clear-all',
       templates: {
-        resetLabel: 'Clear all'
+        resetLabel: 'Alles zurücksetzen'
       }
     }),
-    "refine_categories": panel('Categories')(instantsearch.widgets.refinementList)(
+    "refine_categories": panel('Kategorien')(instantsearch.widgets.refinementList)(
       {
         container: '#facet-categories',
         collapsible: true,
@@ -146,7 +146,7 @@ function get_widgets(SETTINGS) {
         showMore: true,
       }
     ),
-    "refine_mechanics": panel('Mechanics')(instantsearch.widgets.refinementList)(
+    "refine_mechanics": panel('Mechaniken')(instantsearch.widgets.refinementList)(
       {
         container: '#facet-mechanics',
         collapsible: true,
@@ -155,7 +155,7 @@ function get_widgets(SETTINGS) {
         showMore: true,
       }
     ),
-    "refine_players": panel('Number of players')(instantsearch.widgets.hierarchicalMenu)(
+    "refine_players": panel('Anzahl Spieler')(instantsearch.widgets.hierarchicalMenu)(
       {
         container: '#facet-players',
         collapsible: true,
@@ -164,7 +164,7 @@ function get_widgets(SETTINGS) {
         sortBy: function(a, b){ return parseInt(a.name) - parseInt(b.name); },
       }
     ),
-    "refine_weight": panel('Complexity')(instantsearch.widgets.refinementList)(
+    "refine_weight": panel('Komplexität')(instantsearch.widgets.refinementList)(
       {
         container: '#facet-weight',
         attribute: 'weight',
@@ -172,7 +172,7 @@ function get_widgets(SETTINGS) {
         sortBy: function(a, b){ return WEIGHT_LABELS.indexOf(a.name) - WEIGHT_LABELS.indexOf(b.name); },
       }
     ),
-    "refine_playingtime": panel('Playing time')(instantsearch.widgets.refinementList)(
+    "refine_playingtime": panel('Spielzeit')(instantsearch.widgets.refinementList)(
       {
         container: '#facet-playing-time',
         attribute: 'playing_time',
@@ -180,23 +180,23 @@ function get_widgets(SETTINGS) {
         sortBy: function(a, b){ return PLAYING_TIME_ORDER.indexOf(a.name) - PLAYING_TIME_ORDER.indexOf(b.name); },
       }
     ),
-    "refine_min_age": panel('Min age')(instantsearch.widgets.numericMenu)(
+    "refine_min_age": panel('Mindestalter')(instantsearch.widgets.numericMenu)(
       {
         container: '#facet-min-age',
         attribute: 'min_age',
         items: [
-          { label: 'Any age' },
-          { label: '< 5 years', end: 4 },
-          { label: '< 7 years', end: 6 },
-          { label: '< 9 years', end: 8 },
-          { label: '< 11 years', end: 10 },
-          { label: '< 13 years', end: 12 },
-          { label: '< 15 years', end: 14 },
+          { label: 'Jedes Alter' },
+          { label: '< 5 Jahre', end: 4 },
+          { label: '< 7 Jahre', end: 6 },
+          { label: '< 9 Jahre', end: 8 },
+          { label: '< 11 Jahre', end: 10 },
+          { label: '< 13 Jahre', end: 12 },
+          { label: '< 15 Jahre', end: 14 },
           { label: '15+', start: 15 },
         ]
       }
     ),
-    "refine_previousplayers": panel('Previous players')(instantsearch.widgets.refinementList)(
+    "refine_previousplayers": panel('Frühere Spieler')(instantsearch.widgets.refinementList)(
       {
         container: '#facet-previous-players',
         attribute: 'previous_players',
@@ -205,18 +205,18 @@ function get_widgets(SETTINGS) {
         showMore: true,
       }
     ),
-    "refine_numplays": panel('Total plays')(instantsearch.widgets.numericMenu)(
+    "refine_numplays": panel('Gesamtspielanzahl')(instantsearch.widgets.numericMenu)(
       {
         container: '#facet-numplays',
         attribute: 'numplays',
         items: [
-          { label: 'Any number of plays' },
-          { label: 'No plays', end: 0 },
-          { label: '1 play', start: 1, end: 1 },
-          { label: '2-9 plays', start: 2, end: 9 },
-          { label: '10-19 plays', start: 10, end: 19 },
-          { label: '20-29 plays', start: 20, end: 29 },
-          { label: '30+ plays', start: 30 },
+          { label: 'Jede Spielanzahl' },
+          { label: 'Keine Spiele', end: 0 },
+          { label: '1 Spiel', start: 1, end: 1 },
+          { label: '2-9 Spiele', start: 2, end: 9 },
+          { label: '10-19 Spiele', start: 10, end: 19 },
+          { label: '20-29 Spiele', start: 20, end: 29 },
+          { label: '30+ Spiele', start: 30 },
         ]
       }
     ),
@@ -234,9 +234,9 @@ function get_widgets(SETTINGS) {
             num = match[2];
 
             type_callback = {
-              'best': function(num) { return '<strong>' + num + '</strong><span title="Best with">★</span>'; },
+              'best': function(num) { return '<strong>' + num + '</strong><span title="Am besten mit">★</span>'; },
               'recommended': function(num) { return num; },
-              'expansion': function(num) { return num + '<span title="With expansion">⊕</span>'; },
+              'expansion': function(num) { return num + '<span title="Mit Erweiterung">⊕</span>'; },
             };
             players.push(type_callback[type](num));
 
@@ -255,125 +255,21 @@ function get_widgets(SETTINGS) {
 
           if (game.has_more_expansions) {
             game_prefix = game.name.indexOf(":")? game.name.substring(0, game.name.indexOf(":")) : game.name;
-            expansions_url_data = {
-              searchstr: game_prefix,
-              searchfield: "title",
-              objecttype: "thing",
-              subtype: "boardgameexpansion",
-            };
-            has_more_expansions_url = (
-              "https://boardgamegeek.com/collection/user/" +
-              encodeURIComponent(SETTINGS.boardgamegeek.user_name) +
-              "?" +
-              (Object.keys(expansions_url_data).map(function(key){
-                return key + "=" + expansions_url_data[key];
-              })).join("&")  // Don't encode game_prefix, because bgg redirects indefinately then...
-            );
-            game.has_more_expansions_url = has_more_expansions_url;
+            game.name = game_prefix + " (und mehr)";
           }
-
           return game;
         });
       },
       templates: {
-        empty: 'No results',
-        item: document.getElementById('hits-template').innerHTML
+        item: document.getElementById('hit-template').innerHTML,
+        empty: "Keine Spiele gefunden, die deinen Kriterien entsprechen."
       }
     }),
     "stats": instantsearch.widgets.stats({
       container: '#stats'
     }),
     "pagination": instantsearch.widgets.pagination({
-      container: '#pagination',
-      maxPages: 20,
-      showFirst: false,
-      showLast: false
-    })
+      container: '#pagination'
+    }),
   }
 }
-
-function hide_facet_when_no_data(facet_id, games, attr) {
-  var has_data_in_attr = false;
-  for (game of games) {
-    if (game[attr] != [] && game[attr] != "" && game[attr] != 0 && game[attr] != undefined) {
-      has_data_in_attr = true;
-      break;
-    }
-  }
-  var widget = document.querySelector(facet_id);
-  var widget_is_selected = document.querySelector(facet_id + " *[class$='-item--selected']");
-  if (!has_data_in_attr && !widget_is_selected) {
-    widget.style.display = 'none';
-  }
-  else {
-    widget.style.display = 'block';
-  }
-}
-
-function init(SETTINGS) {
-
-  var configIndexName = ''
-  switch (SETTINGS.algolia.sort_by) {
-    case undefined:
-    case 'asc(name)':
-      configIndexName = SETTINGS.algolia.index_name
-      break
-    case 'asc(rank)':
-    case 'desc(rating)':
-      configIndexName = SETTINGS.algolia.index_name + '_rank_ascending'
-      break
-    case 'desc(numrated)':
-      configIndexName = SETTINGS.algolia.index_name + '_numrated_descending'
-      break
-    case 'desc(numowned)':
-      configIndexName = SETTINGS.algolia.index_name + '_numowned_descending'
-      break
-    default:
-      console.error("The provided config value for algolia.sort_by was invalid: " + SETTINGS.algolia.sort_by)
-      break;
-  }
-
-  const search = instantsearch({
-    indexName: configIndexName,
-    searchClient: algoliasearch(
-      SETTINGS.algolia.app_id,
-      SETTINGS.algolia.api_key_search_only
-    ),
-    routing: true
-  });
-
-  search.on('render', on_render);
-
-  var widgets = get_widgets(SETTINGS);
-  search.addWidgets([
-    widgets["search"],
-    widgets["sort"],
-    widgets["clear"],
-    widgets["refine_categories"],
-    widgets["refine_mechanics"],
-    widgets["refine_players"],
-    widgets["refine_weight"],
-    widgets["refine_playingtime"],
-    widgets["refine_min_age"],
-    widgets["hits"],
-    widgets["stats"],
-    widgets["pagination"],
-    widgets["refine_previousplayers"],
-    widgets["refine_numplays"]
-  ]);
-
-  search.start();
-
-  function set_bgg_name() {
-    var title = SETTINGS.project.title;
-    if (!title) {
-      title = "All " + SETTINGS.boardgamegeek.user_name + "'s boardgames";
-    }
-
-    var title_tag = document.getElementsByTagName("title")[0];
-    title_tag.innerHTML = title;
-  }
-  set_bgg_name();
-}
-
-loadJSON("config.json", init);
