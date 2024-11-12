@@ -15,7 +15,7 @@ def main(args):
         debug=args.debug,
     )
     
-    csv_file_path="/Users/nilsheyberg/mybgg/collection.csv"
+    csv_file_path=SETTINGS["project"]["csv_path"]
     game_locations = downloader.load_game_locations_from_csv(csv_file_path)
     
     collection = downloader.collection(
