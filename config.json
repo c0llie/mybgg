@@ -2,7 +2,7 @@
     "project": {
         "name": "mybgg",
         "title": "",
-        "csv_path": "/Users/nilsheyberg/mybgg/collection.csv"
+        "csv_path": "/Users/nilsheyberg/Documents/GitHub/mybgg/collection.csv"
     },
     "boardgamegeek": {
         "user_name": "BingoClub",
