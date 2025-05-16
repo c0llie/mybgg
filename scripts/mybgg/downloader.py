@@ -83,7 +83,11 @@ class Downloader():
                     BoardGame(expansion_data)
                     for expansion_data in game_id_to_expansion[game_data["id"]]
                 ],
-               location=game_locations.get(game_data["id"])  # Standortdaten hinzufügen
+                location=game_locations.get(game_data["id"], {
+                    'location': 'Ort noch nicht verfügbar, frag gerne nach :)',
+                    'location2': '',
+                    'sticker': ''
+                })  # Default dictionary when game_id not found
             )
             
             for game_data in games_data
