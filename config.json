@@ -11,13 +11,8 @@
         }
     },
     "algolia": {
-<<<<<<< Updated upstream
-        "app_id": "K3HP5WCDF1",
-        "api_key_search_only": "b291d3d8e444fc51812b72c29ada7282",
-=======
         "app_id": "2DX9A9FJB3",
         "api_key_search_only": "18dadf98a71910b8fde88688251849fa",
->>>>>>> Stashed changes
         "index_name": "YOUR_INDEX_NAME",
         "hits_per_page": 24
     },
