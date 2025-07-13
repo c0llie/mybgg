@@ -54,7 +54,10 @@
         <dl class="properties">
           <div>
             <dt style="color: green">Standort im Café</dt>
-            <dd>{{ location2 }}</dd>
+            <dd>
+              {{#location2}}{{ location2 }}{{/location2}}
+              {{^location2}}Ort noch nicht verfügbar, frag gerne nach :){{/location2}}
+            </dd>
           </div>
             <div>
             <dt style="color: green">Kategorie</dt>
